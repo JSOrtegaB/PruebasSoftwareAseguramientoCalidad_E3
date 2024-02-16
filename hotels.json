@@ -1,0 +1,19 @@
+{
+    "2": {
+        "hotel_id": "2",
+        "name": "Hotel Grand",
+        "location": "cancun",
+        "rooms": {
+            "100": false,
+            "101": false,
+            "102": false,
+            "103": false
+        }
+    },
+    "1": {
+        "hotel_id": "1",
+        "name": "Test Hotel",
+        "location": "Test Location",
+        "rooms": 500
+    }
+}
