@@ -3,7 +3,7 @@ Hotel Test Module
 """
 import unittest
 from unittest.mock import patch
-from hotel_module import Hotel, HotelManager # pylint: disable=import-error
+from hotel_module import Hotel, HotelManager  # pylint: disable=import-error
 
 
 sample_hotels = {
