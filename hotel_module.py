@@ -61,7 +61,6 @@ class HotelManager:
     def modify_hotel(hotel_id, name=None, location=None, rooms=None):
         """
         Method to modify an existing hotel's details.
-        Parameters can be None if no change is required for that attribute.
         """
         hotels = FileManager.read_file(HotelManager.hotels_file)
         if hotel_id in hotels:

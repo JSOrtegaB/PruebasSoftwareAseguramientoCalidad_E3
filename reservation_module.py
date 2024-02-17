@@ -72,7 +72,7 @@ class Reservation:
     @staticmethod
     def cancel_reservation(reservation_id):
         """
-        Static method to cancel a reservation
+        Method to cancel a reservation
         """
         reservations = FileManager.read_file(Reservation.reservations_file)
         reservation = reservations.get(reservation_id)
