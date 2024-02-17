@@ -1,8 +1,7 @@
 """Unit tests for the Reservation class in the reservation_module module."""
 import unittest
 from unittest.mock import patch
-from reservation_module import Reservation  # Adjust the import path as necessary
-
+from reservation_module import Reservation
 
 
 class TestReservation(unittest.TestCase):
@@ -16,8 +15,10 @@ class TestReservation(unittest.TestCase):
         self.room_number = "101"
         self.start_date = "2024-01-01"
         self.end_date = "2024-01-05"
-        self.reservation = Reservation(self.reservation_id, self.customer_id, self.hotel_id,
-                                       self.room_number, self.start_date, self.end_date)
+        self.reservation = Reservation(self.reservation_id,
+                                       self.customer_id, self.hotel_id,
+                                       self.room_number, self.start_date,
+                                       self.end_date)
 
     @patch('reservation_module.FileManager.write_file')
     @patch('reservation_module.FileManager.read_file')
@@ -39,8 +40,10 @@ class TestReservation(unittest.TestCase):
         """ Test method for creating a reservation."""
         mock_reserve.return_value = (True, "Room reserved successfully")
         mock_get_customer.return_value = {'reservations': {}}
-        result, message = Reservation.create_reservation(self.customer_id, self.hotel_id,
-                                                         self.room_number, self.start_date,
+        result, message = Reservation.create_reservation(self.customer_id,
+                                                         self.hotel_id,
+                                                         self.room_number,
+                                                         self.start_date,
                                                          self.end_date)
         self.assertTrue(result)
         self.assertIn("created successfully", message)
@@ -52,20 +55,26 @@ class TestReservation(unittest.TestCase):
     @patch('reservation_module.HotelManager.cancel_room')
     @patch('reservation_module.CustomerManager.modify_customer')
     @patch('reservation_module.CustomerManager.get_customer')
-    def test_cancel_reservation(self, mock_get_customer, mock_modify_customer, # pylint: disable=unused-argument
-                                mock_cancel_room, mock_read, mock_write):
+    # pylint: disable=unused-argument
+    def test_cancel_reservation(self, mock_get_customer,
+                                mock_modify_customer,
+                                mock_cancel_room,
+                                mock_read, mock_write):
         """ Test method for cancelling a reservation."""
         mock_read.return_value = {
             self.reservation_id: self.reservation.__dict__
         }
         mock_cancel_room.return_value = (True, "Room cancellation successful")
-        mock_get_customer.return_value = {'reservations': {self.reservation_id: {}}}
+        mock_get_customer.return_value = {
+            "reservations": {
+                self.reservation_id: {}
+            }
+        }
         result, message = Reservation.cancel_reservation(self.reservation_id)
         self.assertTrue(result)
         self.assertIn("cancelled successfully", message)
         mock_write.assert_called_once()
 
-    # Add more tests as necessary to cover edge cases and failure scenarios
 
 if __name__ == '__main__':
     unittest.main()

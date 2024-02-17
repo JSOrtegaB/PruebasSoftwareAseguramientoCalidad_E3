@@ -13,10 +13,11 @@ sample_hotels = {
         "location": "Test Location",
         "rooms": {
             "100": False,
-            "101": True 
+            "101": True
         }
     }
 }
+
 
 class TestHotelManager(unittest.TestCase):
     """
@@ -28,10 +29,11 @@ class TestHotelManager(unittest.TestCase):
                 "hotel_id": "1",
                 "name": "Test Hotel",
                 "location": "Test Location",
-                "rooms": {"100": False, "101": True}  # True indicates the room is reserved
-            }
+                "rooms": {"100": False, "101": True}
+            }  # True indicates the room is reserved
         }
-        self.hotel = Hotel("1", "Test Hotel", "Test Location", {"100": False, "101": True})
+        self.hotel = Hotel("1", "Test Hotel", "Test Location",
+                           {"100": False, "101": True})
 
     def test_create_hotel(self):
         """
@@ -39,7 +41,8 @@ class TestHotelManager(unittest.TestCase):
         """
         @patch('hotel_module.FileManager.write_file')
         @patch('hotel_module.FileManager.read_file', return_value={})
-        def test_create_hotel(self, mock_read_file, mock_write_file): # pylint: disable=unused-argument
+        # pylint: disable=unused-argument
+        def test_create_hotel(self, mock_read_file, mock_write_file):
             HotelManager.create_hotel(self.hotel)
             HotelManager.create_hotel(self.hotel)
             mock_write_file.assert_called_once()
@@ -49,7 +52,8 @@ class TestHotelManager(unittest.TestCase):
 
     @patch('hotel_module.FileManager.write_file')
     @patch('hotel_module.FileManager.read_file', return_value=sample_hotels)
-    def test_reserve_room(self, mock_read_file, mock_write_file): # pylint: disable=unused-argument
+    # pylint: disable=unused-argument
+    def test_reserve_room(self, mock_read_file, mock_write_file):
         """
         Test mathod to reserve room
         """
@@ -60,7 +64,8 @@ class TestHotelManager(unittest.TestCase):
 
     @patch('hotel_module.FileManager.write_file')
     @patch('hotel_module.FileManager.read_file', return_value=sample_hotels)
-    def test_cancel_room(self, mock_read_file, mock_write_file): # pylint: disable=unused-argument
+    # pylint: disable=unused-argument
+    def test_cancel_room(self, mock_read_file, mock_write_file):
         """
         Test mathod to cancel a room
         """
@@ -71,7 +76,8 @@ class TestHotelManager(unittest.TestCase):
         self.assertIn("cancelled successfully", message)
 
     @patch('hotel_module.FileManager.read_file', return_value=sample_hotels)
-    def test_get_reserved_rooms(self, mock_read_file): # pylint: disable=unused-argument
+    # pylint: disable=unused-argument
+    def test_get_reserved_rooms(self, mock_read_file):
         """
         Test mathod to get reserved rooms
         """
@@ -80,7 +86,8 @@ class TestHotelManager(unittest.TestCase):
         self.assertIn("101", result)
 
     @patch('hotel_module.FileManager.read_file', return_value=sample_hotels)
-    def test_get_hotel(self, mock_read_file): # pylint: disable=unused-argument
+    # pylint: disable=unused-argument
+    def test_get_hotel(self, mock_read_file):
         """
         Test mathod to get hotel
         """
@@ -135,7 +142,6 @@ class TestHotelManager(unittest.TestCase):
         # Assert that the method returned False (failure)
         self.assertFalse(result)
 
-
     @patch('hotel_module.FileManager.read_file')
     @patch('hotel_module.FileManager.write_file')
     def test_modify_existing_hotel(self, mock_write_file, mock_read_file):
@@ -154,7 +160,7 @@ class TestHotelManager(unittest.TestCase):
 
         # Modifying the existing hotel's details
         result = HotelManager.modify_hotel(
-            "1", 
+            "1",
             name="New Name",
             location="New Location",
             rooms={"102": True}
@@ -162,7 +168,8 @@ class TestHotelManager(unittest.TestCase):
         # Assert that FileManager.read_file was called once
         mock_read_file.assert_called_once_with(HotelManager.hotels_file)
 
-        # Assert that FileManager.write_file was called once with the updated details
+        # Assert that FileManager.write_file was
+        # called once with the updated details
         mock_write_file.assert_called_once_with(HotelManager.hotels_file, {
             "1": {
                 "hotel_id": "1",
