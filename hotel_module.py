@@ -95,8 +95,8 @@ class HotelManager:
         if not hotel:
             return False, "Hotel not found."
         for room, available in hotel['rooms'].items():
-            if available:  # True means the room is available
-                hotel['rooms'][room] = False  # Mark as reserved
+            if not available:  # False means the room is available
+                hotel['rooms'][room] = True  # Mark as reserved
                 FileManager.write_file(HotelManager.hotels_file, hotels)
                 return True, f"Room {room} reserved successfully."
         return False, "No available rooms."
@@ -107,7 +107,7 @@ class HotelManager:
         hotels = FileManager.read_file(HotelManager.hotels_file)
         hotel = hotels.get(hotel_id)
         if hotel and room_number in hotel['rooms']:
-            if not hotel['rooms'][room_number]:  # Room is reserved
+            if hotel['rooms'][room_number]:  # Room is reserved
                 hotel['rooms'][room_number] = True  # Mark as available
                 FileManager.write_file(HotelManager.hotels_file, hotels)
                 return True, (f"Reservation for room "

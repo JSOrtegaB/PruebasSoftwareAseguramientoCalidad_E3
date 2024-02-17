@@ -44,6 +44,7 @@ class Reservation:
         # Reserve the room
         result, message = HotelManager.reserve_room(hotel_id)
         if not result:
+            print("paso aqui")
             return False, message
 
         # Create Reservation instance
