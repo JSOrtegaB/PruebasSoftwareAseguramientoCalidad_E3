@@ -68,6 +68,7 @@ class HotelManager:
             return True  # Indicate success
         else:
             return False  # Indicate failure, hotel ID not found
+
     @staticmethod
     def get_hotel(hotel_id):
         """
@@ -83,18 +84,17 @@ class HotelManager:
 
     @staticmethod
     def reserve_room(hotel_id):
-        """Reserve an available room in a specified hotel."""
+        """Reserve a room in a specified hotel."""
         hotels = FileManager.read_file(HotelManager.hotels_file)
         hotel = hotels.get(hotel_id)
-        if hotel:
-            for room, available in hotel['rooms'].items():
-                if available:  # Room is available
-                    hotel['rooms'][room] = False  # Mark as reserved
-                    FileManager.write_file(HotelManager.hotels_file, hotels)
-                    return True, f"Room {room} reserved successfully."
-            return False, "No available rooms."
-        else:
+        if not hotel:
             return False, "Hotel not found."
+        for room, available in hotel['rooms'].items():
+            if available:  # True means the room is available
+                hotel['rooms'][room] = False  # Mark as reserved
+                FileManager.write_file(HotelManager.hotels_file, hotels)
+                return True, f"Room {room} reserved successfully."
+        return False, "No available rooms."
 
     @staticmethod
     def cancel_room(hotel_id, room_number):
@@ -118,7 +118,7 @@ class HotelManager:
         hotels = FileManager.read_file(HotelManager.hotels_file)
         hotel = hotels.get(hotel_id)
         if hotel:
-            # Collect rooms that are reserved (value is True in Python, corresponding to true in JSON)
+            # Collect rooms that are reserved
             reserved_rooms = [room for room, is_reserved in hotel['rooms'].items() if is_reserved]
             if reserved_rooms:
                 return f"Reserved rooms: {', '.join(reserved_rooms)}"

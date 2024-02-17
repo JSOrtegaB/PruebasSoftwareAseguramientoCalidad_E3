@@ -13,4 +13,4 @@ print(HotelManager.get_hotel("1"))
 HotelManager.modify_hotel("2", "Hotel Grand", "cancun", {100:False, 101:False, 102:False, 103:False})
 print(HotelManager.get_hotel("2"))
 
-print(HotelManager.get_reserved_rooms("1"))
+print(HotelManager.get_reserved_rooms("3"))

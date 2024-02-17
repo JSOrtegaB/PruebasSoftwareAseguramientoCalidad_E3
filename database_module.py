@@ -1,27 +1,36 @@
-# This code is conceptual and may require adjustments for a complete implementation.
-
-import os
+"""
+Database  Module
+"""
 import json
 
 class FileManager:
+    """
+    File Manager Class
+    """
     @staticmethod
     def read_file(file_path):
+        """
+        Method to read file
+        """
         try:
-            with open(file_path, 'r') as file:
+            with open(file_path, 'r', encoding='utf-8') as file:
                 return json.load(file)
         except FileNotFoundError:
             return {}
 
     @staticmethod
     def write_file(file_path, data):
-        with open(file_path, 'w') as file:
+        """
+        Method to write file
+        """
+        with open(file_path, 'w', encoding='utf-8') as file:
             json.dump(data, file, indent=4)
 
 
 
 
 
-
+"""
 class CustomerManager:
     customers_file = "customers.json"
 
@@ -43,3 +52,4 @@ class ReservationManager:
         FileManager.write_file(ReservationManager.reservations_file, reservations)
 
     # Additional method for cancel
+ """
