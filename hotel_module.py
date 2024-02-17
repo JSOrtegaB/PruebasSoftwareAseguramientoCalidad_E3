@@ -1,9 +1,11 @@
 """
 Hotel Module
 """
-from database_module import FileManager
+from database_module import FileManager  # pylint: disable=import-error
+
 
 class Hotel:
+
     """
     Hotel Class to create hotel objects
     """
@@ -20,6 +22,12 @@ class Hotel:
         return (f"Hotel ID: {self.hotel_id}, Name: {self.name}, "
                 f"Location: {self.location}, Rooms: {self.rooms}"
                 )
+
+    def update_name(self, new_name):
+        """
+        Method to update the hotel name
+        """
+        self.name = new_name
 
 
 class HotelManager:
@@ -47,8 +55,7 @@ class HotelManager:
             del hotels[hotel_id]
             FileManager.write_file(HotelManager.hotels_file, hotels)
             return True  # Indicate success
-        else:
-            return False  # Indicate failure, hotel ID not found
+        return False  # Indicate failure, hotel ID not found
 
     @staticmethod
     def modify_hotel(hotel_id, name=None, location=None, rooms=None):
@@ -66,8 +73,7 @@ class HotelManager:
                 hotels[hotel_id]['rooms'] = rooms
             FileManager.write_file(HotelManager.hotels_file, hotels)
             return True  # Indicate success
-        else:
-            return False  # Indicate failure, hotel ID not found
+        return False  # Indicate failure, hotel ID not found
 
     @staticmethod
     def get_hotel(hotel_id):
@@ -79,8 +85,7 @@ class HotelManager:
         hotel = hotels.get(hotel_id)
         if hotel:
             return hotel  # Return the hotel details
-        else:
-            return None  # Hotel ID not found
+        return None  # Hotel ID not found
 
     @staticmethod
     def reserve_room(hotel_id):
@@ -105,12 +110,11 @@ class HotelManager:
             if not hotel['rooms'][room_number]:  # Room is reserved
                 hotel['rooms'][room_number] = True  # Mark as available
                 FileManager.write_file(HotelManager.hotels_file, hotels)
-                return True, f"Reservation for room {room_number} cancelled successfully."
-            else:
-                return False, "Room is not currently reserved."
-        else:
-            return False, "Hotel or room not found."
-
+                return True, (f"Reservation for room "
+                              f"{room_number} cancelled successfully."
+                              )
+            return False, "Room is not currently reserved."
+        return False, "Hotel or room not found."
 
     @staticmethod
     def get_reserved_rooms(hotel_id):
@@ -119,10 +123,9 @@ class HotelManager:
         hotel = hotels.get(hotel_id)
         if hotel:
             # Collect rooms that are reserved
-            reserved_rooms = [room for room, is_reserved in hotel['rooms'].items() if is_reserved]
+            reserved_rooms = [room for room, is_reserved in
+                              hotel['rooms'].items() if is_reserved]
             if reserved_rooms:
                 return f"Reserved rooms: {', '.join(reserved_rooms)}"
-            else:
-                return "No rooms are currently reserved."
-        else:
-            return False, "Hotel not found."
+            return "No rooms are currently reserved."
+        return False, "Hotel not found."

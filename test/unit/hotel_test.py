@@ -13,7 +13,7 @@ sample_hotels = {
         "location": "Test Location",
         "rooms": {
             "100": False,
-            "101": True  # Assuming True means the room is reserved
+            "101": True 
         }
     }
 }
@@ -44,7 +44,7 @@ class TestHotelManager(unittest.TestCase):
             HotelManager.create_hotel(self.hotel)
             mock_write_file.assert_called_once()
             args, _ = mock_write_file.call_args
-            hotels_data = args[1]  # Assuming the hotels data is the second argument
+            hotels_data = args[1]
             self.assertIn(self.hotel.hotel_id, hotels_data)
 
     @patch('hotel_module.FileManager.write_file')
