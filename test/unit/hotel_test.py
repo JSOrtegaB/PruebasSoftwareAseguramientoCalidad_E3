@@ -3,7 +3,7 @@ Hotel Test Module
 """
 import unittest
 from unittest.mock import patch
-from hotel_module import Hotel, HotelManager
+from hotel_module import Hotel, HotelManager # pylint: disable=import-error
 
 
 sample_hotels = {
@@ -41,7 +41,7 @@ class TestHotelManager(unittest.TestCase):
         """
         @patch('hotel_module.FileManager.write_file')
         @patch('hotel_module.FileManager.read_file', return_value={})
-        # pylint: disable=unused-argument
+        #  pylint: disable=unused-argument
         def test_create_hotel(self, mock_read_file, mock_write_file):
             HotelManager.create_hotel(self.hotel)
             HotelManager.create_hotel(self.hotel)

@@ -1,6 +1,7 @@
 """
 Database Test Module
 """
+# pylint: disable=import-error
 import unittest
 from unittest.mock import mock_open, patch
 import json

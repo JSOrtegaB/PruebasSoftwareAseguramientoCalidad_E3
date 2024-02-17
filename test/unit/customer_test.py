@@ -1,6 +1,7 @@
 """
 Hotel Test Module
 """
+# pylint: disable=import-error
 import unittest
 from unittest.mock import patch
 from customer_module import Customer, CustomerManager

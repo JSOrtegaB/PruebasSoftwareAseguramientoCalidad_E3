@@ -1,4 +1,5 @@
 """Unit tests for the Reservation class in the reservation_module module."""
+# pylint: disable=import-error
 import unittest
 from unittest.mock import patch
 from reservation_module import Reservation
@@ -56,6 +57,7 @@ class TestReservation(unittest.TestCase):
     @patch('reservation_module.CustomerManager.modify_customer')
     @patch('reservation_module.CustomerManager.get_customer')
     # pylint: disable=unused-argument
+    # pylint: disable=R0913
     def test_cancel_reservation(self, mock_get_customer,
                                 mock_modify_customer,
                                 mock_cancel_room,
