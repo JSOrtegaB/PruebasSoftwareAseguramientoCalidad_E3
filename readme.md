@@ -42,16 +42,9 @@ pip install -r requirements.txt
 3. Ejecutar las pruebas:
 
 ```
-python -m unittest test/unit
+./pep8_flake8.sh
+./coverage.sh
 ```
-
-**Documentación:**
-
-La documentación del sistema se encuentra en el archivo `README.md`.
-
-**Contacto:**
-
-Si tienes alguna pregunta o comentario, puedes contactarme por correo electrónico a [dirección de correo electrónico eliminada].
 
 **Nota:**
 
