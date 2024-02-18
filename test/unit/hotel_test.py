@@ -89,13 +89,13 @@ class TestHotelManager(unittest.TestCase):
     # pylint: disable=unused-argument
     def test_get_hotel(self, mock_read_file):
         """
-        Test mathod to get hotel
+        Test method to get hotel
         """
         HotelManager.create_hotel(self.hotel)
         # Test retrieving an existing hotel
         hotel = HotelManager.get_hotel("1")
         self.assertIsNotNone(hotel)
-        # Test retrieving a non-existing hotel
+        # Test retrieving a non-existing hotel    <-Negative test
         hotel = HotelManager.get_hotel("non_existing_id")
         self.assertIsNone(hotel)
 
@@ -103,7 +103,7 @@ class TestHotelManager(unittest.TestCase):
     @patch('hotel_module.FileManager.write_file')
     def test_delete_existing_hotel(self, mock_write_file, mock_read_file):
         """
-        Test mathod to delete hotel
+        Test method to delete hotel
         """
         mock_read_file.return_value = {
             "1": {
@@ -126,7 +126,7 @@ class TestHotelManager(unittest.TestCase):
     @patch('hotel_module.FileManager.write_file')
     def test_delete_non_existing_hotel(self, mock_write_file, mock_read_file):
         """
-        Test mathod to delete non existing hotel
+        Test method to delete non existing hotel <-Negative test
         """
         mock_read_file.return_value = {}
 
@@ -146,7 +146,7 @@ class TestHotelManager(unittest.TestCase):
     @patch('hotel_module.FileManager.write_file')
     def test_modify_existing_hotel(self, mock_write_file, mock_read_file):
         """
-        Test mathod to modify hotel
+        Test method to modify hotel
         """
         # Mocking FileManager.read_file to return a dictionary with a hotel
         mock_read_file.return_value = {
@@ -186,7 +186,7 @@ class TestHotelManager(unittest.TestCase):
     @patch('hotel_module.FileManager.write_file')
     def test_modify_non_existing_hotel(self, mock_write_file, mock_read_file):
         """
-        Test mathod to modify non existing hotel
+        Test method to modify non existing hotel
         """
         # Mocking FileManager.read_file to return an empty dictionary
         mock_read_file.return_value = {}

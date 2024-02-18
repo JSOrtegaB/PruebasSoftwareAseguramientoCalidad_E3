@@ -20,6 +20,14 @@ Este repositorio contiene el código fuente y las pruebas unitarias para un sist
 
 El repositorio incluye pruebas unitarias para cada una de las funcionalidades del sistema. Las pruebas se basan en el marco de pruebas `unittest` de Python.
 
+**Pruebas Negativas:**
+
+1. test_read_file_not_found: Prueba que verifica que el sistema lanza una excepción si el archivo de hoteles no existe.
+2. test_get_hotel: non_existing_id: Prueba que verifica que el sistema lanza una excepción si se intenta obtener un hotel que no existe.
+3. test_delete_non_existing_hotel: Prueba que verifica que el sistema lanza una excepción si se intenta eliminar un hotel que no existe.
+4. test_modify_non_existing_hotel: Prueba que verifica que el sistema lanza una excepción si se intenta modificar un hotel que no existe.
+5. test_modify_nonexistent_customer: Prueba que verifica que el sistema lanza una excepción si se intenta modificar un cliente que no existe.
+
 **Tecnologías:**
 
 - Python 3

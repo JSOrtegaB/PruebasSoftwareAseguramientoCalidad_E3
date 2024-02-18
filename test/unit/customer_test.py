@@ -99,6 +99,19 @@ class TestCustomerManager(unittest.TestCase):
         self.assertIsNotNone(customer)
         self.assertEqual(customer['email'], 'johndoe@example.com')
 
+    @patch('customer_module.FileManager.read_file')
+    @patch('customer_module.FileManager.write_file')
+    def test_modify_nonexistent_customer(self, mock_write_file,
+                                         mock_read_file):
+        """
+        Test method to modify a customer that does not exist  # <-Negative test
+        """
+        mock_read_file.return_value = {}
+        result = CustomerManager.modify_customer('nonexistent_id',
+                                                 email='newemail@example.com')
+        self.assertFalse(result)
+        mock_write_file.assert_not_called()
+
 
 if __name__ == '__main__':
     unittest.main()

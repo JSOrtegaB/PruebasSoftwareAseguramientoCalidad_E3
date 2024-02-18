@@ -25,7 +25,7 @@ class TestFileManager(unittest.TestCase):
                                                 'r', encoding='utf-8')
             self.assertEqual(result, mock_data)
 
-    def test_read_file_not_found(self):
+    def test_read_file_not_found(self):  # <-Negative test
         """
         Test method to read file
         """
